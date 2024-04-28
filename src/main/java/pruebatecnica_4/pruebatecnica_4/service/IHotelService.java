@@ -14,4 +14,5 @@ public interface IHotelService {
 
     void eliminarHotel(Long id);
 
+    List<Hotel> findAllById(Long id);
 }

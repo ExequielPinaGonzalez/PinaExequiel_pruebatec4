@@ -29,8 +29,15 @@ public class HotelService implements IHotelService {
     }
 
     @Override
+    public List<Hotel> findAllById(Long id) {
+        return null;
+    }
+
+    @Override
     public Hotel buscarHotel(Long id) {
         return hotelRepo.findById(id).orElse(null);
     }
+
+
 
 }

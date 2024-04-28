@@ -18,8 +18,9 @@ public class Hotel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private String CodigoHotel;
+    private Long id;
+    private String codigoHotel;
     private String nombre;
-    private String lugarciudad;
+    private String lugarCiudad;
 
 }

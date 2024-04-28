@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 import pruebatecnica_4.pruebatecnica_4.model.Hotel;
 
 @Repository
-public class HotelRepository extends JpaRepository<Hotel, Long> {
+public interface HotelRepository extends JpaRepository<Hotel, Long> {
 
 
 }
