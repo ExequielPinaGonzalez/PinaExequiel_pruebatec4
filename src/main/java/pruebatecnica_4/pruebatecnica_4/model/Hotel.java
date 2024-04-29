@@ -14,8 +14,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Hotel {
 
+public class Hotel {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;

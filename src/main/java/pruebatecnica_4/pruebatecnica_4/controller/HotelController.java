@@ -22,7 +22,10 @@ public class HotelController {
     @Autowired
     private IHotelService hotelService;
 
-    @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "La operación se ejecutó correctamente"), @ApiResponse(responseCode = "204", description = "No se encontró ningún paciente con el ID especificado"), @ApiResponse(responseCode = "400", description = "Algún parámetro no cumple con el formato o es requerido y no está presente."), @ApiResponse(responseCode = "500", description = "Error interno del servidor")})
+    @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "La operación se ejecutó correctamente"),
+                           @ApiResponse(responseCode = "204", description = "No se encontró ningún paciente con el ID especificado"),
+                           @ApiResponse(responseCode = "400", description = "Algún parámetro no cumple con el formato o es requerido y no está presente."),
+                           @ApiResponse(responseCode = "500", description = "Error interno del servidor")})
 
 
     @GetMapping("/hotels")
