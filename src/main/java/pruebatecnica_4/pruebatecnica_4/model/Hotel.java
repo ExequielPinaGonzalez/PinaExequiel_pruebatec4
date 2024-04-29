@@ -13,7 +13,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-
 public class Hotel {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

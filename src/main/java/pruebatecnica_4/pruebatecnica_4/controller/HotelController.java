@@ -53,7 +53,7 @@ public class HotelController {
     public ResponseEntity<?> buscarHotel(@PathVariable Long id) {
         Hotel hotel = hotelService.buscarHotel(id);
         if (hotel == null) {
-            return new ResponseEntity<>("Id no encontrado", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Hotel no encontrado", HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(hotel, HttpStatus.OK);
     }
