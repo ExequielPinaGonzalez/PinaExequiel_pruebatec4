@@ -14,7 +14,6 @@ public interface IClienteService {
 
     public Cliente buscarCliente(Long id);
 
-    public List<Cliente> buscarClientePorId(Long id);
 
 
 }

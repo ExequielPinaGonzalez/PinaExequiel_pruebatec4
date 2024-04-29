@@ -1,13 +1,12 @@
 package pruebatecnica_4.pruebatecnica_4.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -22,5 +21,7 @@ public class Hotel {
     private String codigoHotel;
     private String nombre;
     private String lugarCiudad;
+    @OneToMany
+    private List<Habitacion>habitaciones;
 
 }

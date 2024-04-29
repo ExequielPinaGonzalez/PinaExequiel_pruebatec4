@@ -18,19 +18,17 @@ public class HotelController {
 
     @Autowired
     private HotelRepository hotelRepository;
-
     @Autowired
     private IHotelService hotelService;
 
     @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "La operación se ejecutó correctamente"),
-                           @ApiResponse(responseCode = "204", description = "No se encontró ningún paciente con el ID especificado"),
-                           @ApiResponse(responseCode = "400", description = "Algún parámetro no cumple con el formato o es requerido y no está presente."),
-                           @ApiResponse(responseCode = "500", description = "Error interno del servidor")})
+            @ApiResponse(responseCode = "204", description = "No se encontró ningún paciente con el ID especificado"),
+            @ApiResponse(responseCode = "400", description = "Algún parámetro no cumple con el formato o es requerido y no está presente."),
+            @ApiResponse(responseCode = "500", description = "Error interno del servidor")})
 
 
     @GetMapping("/hotels")
     public ResponseEntity<List<Hotel>> obtenerHoteles() {
-
         return new ResponseEntity<>(hotelService.obtenerHoteles(), HttpStatus.OK);
     }
 
@@ -43,37 +41,37 @@ public class HotelController {
 
     @DeleteMapping("/hotels/delete/{id}")
     public ResponseEntity<?> borrarHotel(@PathVariable Long id) {
-        if (id == null) {
-            return new ResponseEntity<>("Id no encontrado", HttpStatus.NO_CONTENT);
+        Hotel hotel = hotelService.buscarHotel(id);
+        if (hotel == null) {
+            return new ResponseEntity<>("Hotel no encontrado", HttpStatus.NOT_FOUND);
         }
         hotelService.eliminarHotel(id);
         return new ResponseEntity<>(id, HttpStatus.OK);
     }
 
     @GetMapping("/hotels/{id}")
-    public ResponseEntity<List<Hotel>> buscarHotel(@PathVariable Long id) {
-        List<Hotel> hoteles = hotelService.findAllById(id);
-
-        return null;
+    public ResponseEntity<?> buscarHotel(@PathVariable Long id) {
+        Hotel hotel = hotelService.buscarHotel(id);
+        if (hotel == null) {
+            return new ResponseEntity<>("Id no encontrado", HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(hotel, HttpStatus.OK);
     }
 
     @PutMapping("/hotels/edit/{id}")
-    public ResponseEntity<?> editarHotel(@PathVariable Long id,
-                                         @RequestParam("codigoHotel") String codigoEdit,
-                                         @RequestParam("nombre") String nombreEdit,
-                                         @RequestParam("lugarCiudad") String lugarCiudadEdit) {
+    public ResponseEntity<?> editarHotel(@PathVariable Long id, @RequestBody Hotel hotel) {
 
-        Hotel hotel = hotelService.buscarHotel(id);
+        Hotel hotelEdit = hotelService.buscarHotel(id);
 
-        if (hotel == null) {
+        if (hotelEdit == null) {
             return new ResponseEntity<>("Hotel no encontrado", HttpStatus.NO_CONTENT);
         }
-        hotel.setCodigoHotel(codigoEdit);
-        hotel.setNombre(nombreEdit);
-        hotel.setLugarCiudad(lugarCiudadEdit);
-        hotelService.guardarHotel(hotel);
+        hotelEdit.setCodigoHotel(hotel.getCodigoHotel());
+        hotelEdit.setNombre(hotel.getNombre());
+        hotelEdit.setLugarCiudad(hotel.getLugarCiudad());
+        hotelService.guardarHotel(hotelEdit);
 
-        return new ResponseEntity<>(hotel, HttpStatus.OK);
+        return new ResponseEntity<>(hotelEdit, HttpStatus.OK);
 
     }
 

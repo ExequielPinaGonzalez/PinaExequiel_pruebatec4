@@ -28,16 +28,11 @@ public class HotelService implements IHotelService {
         hotelRepo.deleteById(id);
     }
 
-    @Override
-    public List<Hotel> findAllById(Long id) {
-        return null;
-    }
 
     @Override
     public Hotel buscarHotel(Long id) {
         return hotelRepo.findById(id).orElse(null);
     }
-
 
 
 }
