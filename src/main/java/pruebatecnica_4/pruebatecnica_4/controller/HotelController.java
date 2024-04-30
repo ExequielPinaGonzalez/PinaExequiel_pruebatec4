@@ -22,7 +22,7 @@ public class HotelController {
     private IHotelService hotelService;
 
     @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "La operación se ejecutó correctamente"),
-            @ApiResponse(responseCode = "204", description = "No se encontró ningún paciente con el ID especificado"),
+            @ApiResponse(responseCode = "204", description = "No se encontró ningún Hotel con el ID especificado"),
             @ApiResponse(responseCode = "400", description = "Algún parámetro no cumple con el formato o es requerido y no está presente."),
             @ApiResponse(responseCode = "500", description = "Error interno del servidor")})
 
@@ -36,12 +36,13 @@ public class HotelController {
     public String newHotel(@RequestBody Hotel hotel) {
         hotelService.guardarHotel(hotel);
 
-        return "New Hotel";
+        return "Hotel creado con éxito";
     }
 
     @DeleteMapping("/hotels/delete/{id}")
     public ResponseEntity<?> borrarHotel(@PathVariable Long id) {
         Hotel hotel = hotelService.buscarHotel(id);
+
         if (hotel == null) {
             return new ResponseEntity<>("Hotel no encontrado", HttpStatus.NOT_FOUND);
         }
@@ -52,6 +53,7 @@ public class HotelController {
     @GetMapping("/hotels/{id}")
     public ResponseEntity<?> buscarHotel(@PathVariable Long id) {
         Hotel hotel = hotelService.buscarHotel(id);
+
         if (hotel == null) {
             return new ResponseEntity<>("Hotel no encontrado", HttpStatus.NOT_FOUND);
         }
@@ -69,6 +71,7 @@ public class HotelController {
         hotelEdit.setCodigoHotel(hotel.getCodigoHotel());
         hotelEdit.setNombre(hotel.getNombre());
         hotelEdit.setLugarCiudad(hotel.getLugarCiudad());
+
         hotelService.guardarHotel(hotelEdit);
 
         return new ResponseEntity<>(hotelEdit, HttpStatus.OK);

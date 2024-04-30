@@ -23,7 +23,6 @@ public class Habitacion {
     private Double precioPorNoche;
     private LocalDate disponibleDesde;
     private LocalDate disponibleHasta;
-    private boolean reservado;
     @ManyToOne
     private Hotel hotel;
 

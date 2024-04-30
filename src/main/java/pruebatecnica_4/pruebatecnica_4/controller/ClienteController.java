@@ -23,7 +23,7 @@ public class ClienteController {
     private IClienteService clienteServi;
 
     @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "La operación se ejecutó correctamente"),
-            @ApiResponse(responseCode = "204", description = "No se encontró ningún paciente con el ID especificado"),
+            @ApiResponse(responseCode = "204", description = "No se encontró ningún cliente con el ID especificado"),
             @ApiResponse(responseCode = "400", description = "Algún parámetro no cumple con el formato o es requerido y no está presente."),
             @ApiResponse(responseCode = "500", description = "Error interno del servidor")})
 
@@ -36,12 +36,13 @@ public class ClienteController {
     public String newCliente(@RequestBody Cliente cliente) {
         clienteServi.guardarCliente(cliente);
 
-        return "New Cliente";
+        return "Cliente creado con éxito";
     }
 
     @DeleteMapping("clientes/delete/{id}")
     public ResponseEntity<?> borrarCliente(@PathVariable Long id) {
         Cliente cliente = clienteServi.buscarCliente(id);
+
         if (cliente == null) {
             return new ResponseEntity<>("Cliente no encontrado", HttpStatus.NO_CONTENT);
         }
@@ -52,8 +53,9 @@ public class ClienteController {
     @GetMapping("clientes/{id}")
     public ResponseEntity<?> buscarCliente(@PathVariable Long id) {
         Cliente cliente = clienteServi.buscarCliente(id);
+
         if (cliente == null) {
-            return new ResponseEntity<>("Id no encontrado", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Cliente no encontrado", HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(cliente, HttpStatus.OK);
     }
