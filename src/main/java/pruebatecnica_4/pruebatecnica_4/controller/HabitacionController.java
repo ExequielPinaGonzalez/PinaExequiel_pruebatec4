@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pruebatecnica_4.pruebatecnica_4.model.Habitacion;
-import pruebatecnica_4.pruebatecnica_4.model.Vuelo;
 import pruebatecnica_4.pruebatecnica_4.repository.HabitacionRepository;
 import pruebatecnica_4.pruebatecnica_4.service.IHabitacionService;
 
@@ -35,9 +34,9 @@ public class HabitacionController {
         return new ResponseEntity<>(habiServi.obtenerHabitaciones(), HttpStatus.OK);
     }
 
-    @PostMapping("/habitaciones/new")
-    public String newHabitacion(@RequestBody Habitacion habitacion) {
-        habiServi.guardarHabitacion(habitacion);
+    @PostMapping("/habitaciones/{idHotel}/new")
+    public String newHabitacion(@RequestBody Habitacion habitacion, @PathVariable Long idHotel) {
+        habiServi.guardarHabitacion(habitacion, idHotel);
 
         return "Habitacion creada con éxito";
     }
@@ -63,10 +62,10 @@ public class HabitacionController {
         return new ResponseEntity<>(habitacion, HttpStatus.OK);
     }
 
-    @PutMapping("/habitaciones/edit/{id}")
-    public ResponseEntity<?> editarHabitacion(@PathVariable Long id, @RequestBody Habitacion habitacion) {
+    @PutMapping("/habitaciones/{idHotel}/edit/{idHabitacion}")
+    public ResponseEntity<?> editarHabitacion(@PathVariable Long idHotel,@PathVariable Long idHabitacion, @RequestBody Habitacion habitacion ) {
 
-        Habitacion habitacionEdit = habiServi.buscarHabitacion(id);
+        Habitacion habitacionEdit = habiServi.buscarHabitacion(idHabitacion);
 
         if (habitacionEdit == null) {
             return new ResponseEntity<>("Vuelo no encontrado", HttpStatus.NO_CONTENT);
@@ -77,7 +76,7 @@ public class HabitacionController {
         habitacionEdit.setDisponibleHasta(habitacion.getDisponibleHasta());
         habitacionEdit.setHotel(habitacion.getHotel());
 
-        habiServi.guardarHabitacion(habitacionEdit);
+        habiServi.guardarHabitacion(habitacionEdit, idHotel);
 
         return new ResponseEntity<>(habitacionEdit, HttpStatus.OK);
     }

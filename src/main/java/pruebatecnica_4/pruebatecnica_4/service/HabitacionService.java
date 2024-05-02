@@ -19,7 +19,7 @@ public class HabitacionService implements IHabitacionService {
     }
 
     @Override
-    public void guardarHabitacion(Habitacion habitacion) {
+    public void guardarHabitacion(Habitacion habitacion, Long idHotel) {
         habiRepo.save(habitacion);
     }
 

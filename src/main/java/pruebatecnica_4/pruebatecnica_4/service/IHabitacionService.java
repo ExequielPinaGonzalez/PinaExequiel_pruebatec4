@@ -10,7 +10,7 @@ public interface IHabitacionService {
 
     Habitacion buscarHabitacion(Long id);
 
-    void guardarHabitacion(Habitacion habitacion);
+    void guardarHabitacion(Habitacion habitacion, Long idHotel);
 
     void eliminarHabitacion(Long id);
 
