@@ -3,6 +3,7 @@ package pruebatecnica_4.pruebatecnica_4.controller;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +11,7 @@ import pruebatecnica_4.pruebatecnica_4.model.Habitacion;
 import pruebatecnica_4.pruebatecnica_4.repository.HabitacionRepository;
 import pruebatecnica_4.pruebatecnica_4.service.IHabitacionService;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -40,6 +42,23 @@ public class HabitacionController {
 
         return "Habitacion creada con éxito";
     }
+
+//    @GetMapping("/rooms")
+//    public ResponseEntity<String> getAvailableRooms(
+//            @RequestParam("dateFrom") @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dateFrom,
+//            @RequestParam("dateTo") @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dateTo,
+//            @RequestParam("destination") String destination) {
+//
+//        List<Habitacion> disponibles = habiServi.habitacionesDisponibles(dateFrom, dateTo, destination);
+//
+//        if (disponibles.isEmpty()) {
+//            return new ResponseEntity<>("No se encontraron habitaciones disponibles para las fechas y destino especificados",
+//                    HttpStatus.NOT_FOUND);
+//        }
+//
+//        return new ResponseEntity<Habitacion>(disponibles, HttpStatus.OK);
+//    }
+
 
     @DeleteMapping("/habitaciones/delete/{id}")
     public ResponseEntity<?> borrarHabitacion(@PathVariable Long id) {
