@@ -31,19 +31,19 @@ public class HabitacionController {
             @ApiResponse(responseCode = "400", description = "Algún parámetro no cumple con el formato o es requerido y no está presente."),
             @ApiResponse(responseCode = "500", description = "Error interno del servidor")})
 
-    @GetMapping("/habitaciones")
+    @GetMapping("/room-booking/")
     public ResponseEntity<List<Habitacion>> obtenerHabitaciones() {
         return new ResponseEntity<>(habiServi.obtenerHabitaciones(), HttpStatus.OK);
     }
 
-    @PostMapping("/habitaciones/{idHotel}/new")
+    @PostMapping("/room-booking/{idHotel}/new")
     public String newHabitacion(@RequestBody Habitacion habitacion, @PathVariable Long idHotel) {
         habiServi.guardarHabitacion(habitacion, idHotel);
 
         return "Habitacion creada con éxito";
     }
 
-//    @GetMapping("/rooms")
+//    @GetMapping("/agency/rooms?")
 //    public ResponseEntity<String> getAvailableRooms(
 //            @RequestParam("dateFrom") @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dateFrom,
 //            @RequestParam("dateTo") @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dateTo,
@@ -60,7 +60,7 @@ public class HabitacionController {
 //    }
 
 
-    @DeleteMapping("/habitaciones/delete/{id}")
+    @DeleteMapping("/room-booking/delete/{id}")
     public ResponseEntity<?> borrarHabitacion(@PathVariable Long id) {
         Habitacion habitacion = habiServi.buscarHabitacion(id);
 
@@ -71,7 +71,7 @@ public class HabitacionController {
         return new ResponseEntity<>(id, HttpStatus.OK);
     }
 
-    @GetMapping("/habitaciones/{id}")
+    @GetMapping("/room-booking//{id}")
     public ResponseEntity<?> buscarHabitacion(@PathVariable Long id) {
         Habitacion habitacion = habiServi.buscarHabitacion(id);
 
@@ -81,7 +81,7 @@ public class HabitacionController {
         return new ResponseEntity<>(habitacion, HttpStatus.OK);
     }
 
-    @PutMapping("/habitaciones/{idHotel}/edit/{idHabitacion}")
+    @PutMapping("room-booking//{idHotel}/edit/{idHabitacion}")
     public ResponseEntity<?> editarHabitacion(@PathVariable Long idHotel,@PathVariable Long idHabitacion, @RequestBody Habitacion habitacion ) {
 
         Habitacion habitacionEdit = habiServi.buscarHabitacion(idHabitacion);
