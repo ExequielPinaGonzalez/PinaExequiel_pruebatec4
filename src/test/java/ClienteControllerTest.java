@@ -45,7 +45,7 @@ class ClienteControllerTest {
     }
 }
 
-// Suponiendo que tengo una clase Cliente con estos atributos
+
 class Cliente {
     private Long id;
     private String nombre;
@@ -61,7 +61,7 @@ class Cliente {
     // Getters y setters (omitir por brevedad)
 }
 
-// Suponiendo que tienes un servicio ClienteService con este método
+
 interface ClienteService {
     List<Cliente> obtenerClientes();
 }
